@@ -27,6 +27,7 @@ main {
       text-align: center;
       height: 320px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       border-radius: 10px; 
@@ -56,4 +57,26 @@ main {
     font-family: Karla, sans-serif;
     font-weight: 700;
     color: #2B283A;
+}
+
+.roll-btn {
+    font-family: karla, sans-serif;
+    font-weight: 700;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 30px; 
+    border-radius: 3.81px;
+    font-size: 1.024rem;
+    margin-top: 25.6px;
+    background-color: #5035FF;
+    box-shadow: 0 3.2px 7.68px rgba(0, 0, 0, 0.18);
+}
+
+.roll-btn:hover {
+  background-color: #6047ff;
+}
+
+.roll-btn:active {
+  background-color: #826fff;
 }

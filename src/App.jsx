@@ -17,13 +17,18 @@ function App() {
     const [ diceNums, setDiceNums ] = useState(allNewDice);
     const diceComponents = diceNums.map(diceNum => <Die key={nanoid()} val={diceNum}/>);
   
+     function handleRollClick() {
+          setDiceNums(allNewDice());
+     }
+     
   return (
     <main>
         <div className="container">
             <div className="game-floor">
                 <div className="die-grid">
                     {diceComponents}
-                </div>  
+                </div>
+                <button onClick={handleRollClick} class="roll-btn">Roll</button>  
             </div>
         </div>
     </main>
