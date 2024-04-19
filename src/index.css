@@ -5,6 +5,8 @@
   box-sizing: border-box;
 }
 
+
+
 main {
   border: 1px solid black;
   height: 100vh;
@@ -28,7 +30,7 @@ main {
       height: 320px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       border-radius: 10px; 
       padding: 33.5px 34.56px;
@@ -79,4 +81,24 @@ main {
 
 .roll-btn:active {
   background-color: #826fff;
+}
+
+.game-title > h1 {
+    font-family: Karla;
+    font-weight: 700;
+    color: #2B283A;
+    font-size: 1.6rem;
+    letter-spacing: -3%;
+}
+
+.game-desc {
+    margin-top: 4px;
+   margin-bottom: 30px;
+}
+.game-desc > h4 {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 0.82rem;
+    letter-spacing: -3%;
+    color: #4A4E74;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Die from './Die';
+import Confetti from 'react-confetti'
 import { nanoid } from 'nanoid'
 
 
@@ -17,47 +18,67 @@ function App() {
 
 
   const [ diceNums, setDiceNums ] = useState(allNewDice);
+  const [ tenzies, setTenzies ] = useState(false);
 
+  useEffect(() => {
+      const allEqual = diceNums.every(dice => (dice.value === diceNums[0].value) && (dice.isHeld));
+      if (allEqual) {
+          setTenzies(true);
+      }
 
+  }, [diceNums]);
   function generateNewDie() {
-    return {
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-        id: nanoid()
-    }
-  }
-
-  function selectDice (id) {
-      const index = diceNums.findIndex(diceNum => diceNum.id === id);
-      if (index !== -1) {
-          const newDices = [...diceNums];
-          newDices[index] = { ...newDices[index], isHeld: !newDices[index].isHeld  }
-          setDiceNums(newDices);
+      return {
+          value: Math.ceil(Math.random() * 6),
+          isHeld: false,
+          id: nanoid()
       }
   }
 
-  const diceComponents = diceNums.map(diceNum => <Die key={diceNum.id} val={diceNum.value} isHeld={diceNum.isHeld} handleClick={() => selectDice(diceNum.id)} />);
-    
-      
+  function selectDice (id) {
+        const index = diceNums.findIndex(diceNum => diceNum.id === id);
+        if (index !== -1) {
+            const newDices = [...diceNums];
+            newDices[index] = { ...newDices[index], isHeld: !newDices[index].isHeld  }
+            setDiceNums(newDices);
+        }
+    }
 
-     function rollDice() {
-          setDiceNums(oldDice => oldDice.map(dice => {
-              return dice.isHeld ? dice : generateNewDie();
-          }));
-     }
+  const diceComponents = diceNums.map(diceNum => <Die key={diceNum.id} val={diceNum.value} isHeld={diceNum.isHeld} handleClick={() => selectDice(diceNum.id)} />);
+      
+        
+
+  function rollDice(event) {
+        if (event.target.innerText === 'New Game') {
+            setDiceNums(allNewDice());
+            setTenzies(false);
+        }
+        else {
+        setDiceNums(oldDice => oldDice.map(dice => {
+            return dice.isHeld ? dice : generateNewDie();
+        }));
+      }
+  }
 
   return (
-    <main>
-        <div className="container">
-            <div className="game-floor">
-                <div className="die-grid">
-                    {diceComponents}
-                </div>
-                <button onClick={rollDice} className="roll-btn">Roll</button>  
-            </div>
-        </div>
-    </main>
-  );
-}
+      <main>
+          {tenzies ? <Confetti /> : ""}
+          <div className="container">
+              <div className="game-floor">
+                  <div className="game-title">
+                      <h1>Tenzies</h1>
+                  </div>
+                  <div className="game-desc">
+                       <h4>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</h4>
+                  </div>
+                  <div className="die-grid">
+                      {diceComponents}
+                  </div>
+                  <button onClick={event => rollDice(event)} className="roll-btn"> { tenzies ? 'New Game' : 'Roll' } </button>  
+              </div>
+          </div>
+      </main>
+    );
+  }
 
 export default App
