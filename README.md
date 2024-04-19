@@ -1,8 +1,16 @@
-# React + Vite
+# Tenzies
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A game developed in React and Vanilla CSS.
 
-Currently, two official plugins are available:
+To play the game: 
+- npm create vite@latest
+- npm install
+- npm run dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How does the game work?
+You have to click any identical numbers on each roll. Once you click all identical numbers, It displays a confetti. 
+
+Do you have any comments?
+Email me at yonathanber@icloud.com
+
+Thank you!
