@@ -9,7 +9,7 @@ function App() {
   const allNewDice = () => {
     const newDice = []
     for (let i = 0; i < 10; i++) {
-        newDice.push({value: Math.ceil(Math.random() * 6), isHeld: false, id:nanoid()});
+        newDice.push(generateNewDie());
     }
     return newDice;
   }
@@ -17,6 +17,15 @@ function App() {
 
 
   const [ diceNums, setDiceNums ] = useState(allNewDice);
+
+
+  function generateNewDie() {
+    return {
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: nanoid()
+    }
+  }
 
   function selectDice (id) {
       const index = diceNums.findIndex(diceNum => diceNum.id === id);
@@ -29,10 +38,12 @@ function App() {
 
   const diceComponents = diceNums.map(diceNum => <Die key={diceNum.id} val={diceNum.value} isHeld={diceNum.isHeld} handleClick={() => selectDice(diceNum.id)} />);
     
-   
+      
 
-     function handleRollClick() {
-          setDiceNums(allNewDice());
+     function rollDice() {
+          setDiceNums(oldDice => oldDice.map(dice => {
+              return dice.isHeld ? dice : generateNewDie();
+          }));
      }
 
   return (
@@ -42,7 +53,7 @@ function App() {
                 <div className="die-grid">
                     {diceComponents}
                 </div>
-                <button onClick={handleRollClick} className="roll-btn">Roll</button>  
+                <button onClick={rollDice} className="roll-btn">Roll</button>  
             </div>
         </div>
     </main>
