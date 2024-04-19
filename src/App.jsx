@@ -1,6 +1,14 @@
 import React from 'react';
 import Die from './Die';
 
+const allNewDice = () => {
+    const randomNums = [];
+    for (let i = 0; i < 10; i++) {
+         randomNums.push(Math.ceil(Math.random() * 6)); 
+    }
+    return randomNums;
+}
+
 function App() {
   
   return (
