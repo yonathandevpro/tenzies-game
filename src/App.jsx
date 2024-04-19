@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Die from './Die';
+import { nanoid } from 'nanoid'
 
-const allNewDice = () => {
+
+
+function App() {
+
+  const allNewDice = () => {
     const randomNums = [];
     for (let i = 0; i < 10; i++) {
          randomNums.push(Math.ceil(Math.random() * 6)); 
@@ -9,25 +14,16 @@ const allNewDice = () => {
     return randomNums;
 }
 
-function App() {
+    const [ diceNums, setDiceNums ] = useState(allNewDice);
+    const diceComponents = diceNums.map(diceNum => <Die key={nanoid()} val={diceNum}/>);
   
   return (
     <main>
         <div className="container">
             <div className="game-floor">
                 <div className="die-grid">
-                    <Die val={1} />
-                    <Die val={2} />
-                    <Die val={3} />
-                    <Die val={2} />
-                    <Die val={5} />
-                    <Die val={6} />
-                    <Die val={1} />
-                    <Die val={4} />
-                    <Die val={3} />
-                    <Die val={2} />
-                </div>
-                 
+                    {diceComponents}
+                </div>  
             </div>
         </div>
     </main>
