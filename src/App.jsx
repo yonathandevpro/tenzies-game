@@ -48,21 +48,21 @@ function App() {
       
         
 
-  function rollDice(event) {
-        if (event.target.innerText === 'New Game') {
+  function rollDice() {
+        if (tenzies) {
             setDiceNums(allNewDice());
             setTenzies(false);
         }
         else {
-        setDiceNums(oldDice => oldDice.map(dice => {
-            return dice.isHeld ? dice : generateNewDie();
-        }));
+            setDiceNums(oldDice => oldDice.map(dice => {
+                return dice.isHeld ? dice : generateNewDie();
+            }));
       }
   }
 
   return (
       <main>
-          {tenzies ? <Confetti /> : ""}
+          { tenzies && <Confetti /> }
           <div className="container">
               <div className="game-floor">
                   <div className="game-title">
@@ -74,7 +74,7 @@ function App() {
                   <div className="die-grid">
                       {diceComponents}
                   </div>
-                  <button onClick={event => rollDice(event)} className="roll-btn"> { tenzies ? 'New Game' : 'Roll' } </button>  
+                  <button onClick={() => rollDice()} className="roll-btn"> { tenzies ? 'New Game' : 'Roll' } </button>  
               </div>
           </div>
       </main>
