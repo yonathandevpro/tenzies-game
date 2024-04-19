@@ -9,14 +9,25 @@ function App() {
   const allNewDice = () => {
     const newDice = []
     for (let i = 0; i < 10; i++) {
-        newDice.push({value: Math.ceil(Math.random() * 6), isHeld: false});
+        newDice.push({value: Math.ceil(Math.random() * 6), isHeld: false, id:nanoid()});
     }
     return newDice;
   }
+  
+
 
   const [ diceNums, setDiceNums ] = useState(allNewDice);
 
-  const diceComponents = diceNums.map(diceNum => <Die key={nanoid()} val={diceNum.value}/>);
+  function selectDice (id) {
+      const index = diceNums.findIndex(diceNum => diceNum.id === id);
+      if (index !== -1) {
+          const newDices = [...diceNums];
+          newDices[index] = { ...newDices[index], isHeld: !newDices[index].isHeld  }
+          setDiceNums(newDices);
+      }
+  }
+
+  const diceComponents = diceNums.map(diceNum => <Die key={diceNum.id} val={diceNum.value} isHeld={diceNum.isHeld} handleClick={() => selectDice(diceNum.id)} />);
     
    
 
